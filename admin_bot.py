@@ -31,29 +31,29 @@ async def on_ready():
     # scheduler.start()
 
 
-# @slash.slash(
-#     name="update",
-#     guild_ids=[797018153406300160],
-# )
-# async def _update(ctx):
-#     guild = ctx.guild
-#     bot_log = get(guild.channels, name="bot-log")
+@slash.slash(
+    name="update",
+    guild_ids=[797018153406300160],
+)
+async def _update(ctx):
+    guild = ctx.guild
+    bot_log = get(guild.channels, name="bot-log")
 
-#     await bot_log.send("Starting Update!")
+    await bot_log.send("Starting Update!")
 
-#     # await bot_log.send("Благодарим на Админите:")
-#     # await update.update_admins(guild, bot_log)
+    # await bot_log.send("Благодарим на Админите:")
+    # await update.update_admins(guild, bot_log)
 
-#     # await bot_log.send("HackTUES Update")
-#     # await update.update_hacktues(guild)
+    # await bot_log.send("HackTUES Update")
+    # await update.update_hacktues(guild)
 
-#     await bot_log.send("Казваме ДОВИЖДАНЕ на 12ти клас! :wave:")
-#     await update.update_alumni(guild)
+    await bot_log.send("Казваме ДОВИЖДАНЕ на 12ти клас! :wave:")
+    await update.update_alumni(guild)
 
-#     await update.update_students(guild, bot_log)
-#     await bot_log.send("Добре дошли на следващото ниво! :arrow_double_up:")
+    await update.update_students(guild, bot_log)
+    await bot_log.send("Добре дошли на следващото ниво! :arrow_double_up:")
 
-#     await bot_log.send("Update finished!")
+    await bot_log.send("Update finished!")
 
 
 @slash.slash(
@@ -134,6 +134,39 @@ async def _ht(ctx, name: str):
 async def _ping(ctx):
     await ctx.respond()
     await ctx.send(f"Pong! ({bot.latency*1000}ms)")
+
+
+@slash.slash(
+    name="admin",
+    description="Админ команди",
+    options=[
+        manage_commands.create_option(
+            name="id", description="ID на потребител", option_type=3, required=True
+        )
+    ],
+    guild_ids=[797018153406300160],
+)
+async def _admin(ctx, id: str):
+    guild = ctx.guild
+    # Check if user is admin
+    role_admin = get(guild.roles, name="Админ")
+    if role_admin in ctx.author.roles:
+        # Get user by id
+        for member in guild.members:
+            if str(member.id) == str(id):
+                user = member
+                if not user:
+                    await ctx.send(f"Няма потребител с ID {id}!")
+                    return
+                else:
+                    print(f"User {user} is admin!")
+                    # Add admin role
+                    await user.add_roles(role_admin)
+                    # Send message
+                    await ctx.send(f"Потребител с ID {id} е администратор!")
+                break
+    else:
+        await ctx.send("Нямаш права за това!")
 
 
 if __name__ == "__main__":
