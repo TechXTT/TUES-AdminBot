@@ -19,7 +19,7 @@ slash = SlashCommand(bot, sync_commands=True)
 @bot.event
 async def on_ready():
     guild = get(bot.guilds, name=utils.GUILD)
-
+    print(utils.GUILD)
     print(
         f"{bot.user} is connected to the following guild:\n"
         f"{guild.name}(id: {guild.id})\n"

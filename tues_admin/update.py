@@ -56,5 +56,4 @@ async def update_alumni(guild):
     role_alumni = get(guild.roles, name='Завършили')
 
     for student in utils.get_members_with_role(guild, role_12):
-        await utils.remove_all_roles(student)
-        await utils.update_and_dm(student, role_alumni, False)
+        await utils.update_roles(guild, role_12, role_alumni)
