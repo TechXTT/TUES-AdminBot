@@ -31,30 +31,30 @@ async def on_ready():
     # scheduler.start()
 
 
-# @slash.slash(
-#     name="update",
-#     guild_ids=[797018153406300160],
-# )
-# async def _update(ctx):
-#     guild = ctx.guild
-#     bot_log = get(guild.channels, name="bot-log")
+@slash.slash(
+    name="update",
+    guild_ids=[797018153406300160],
+)
+async def _update(ctx):
+    guild = ctx.guild
+    bot_log = get(guild.channels, name="bot-log")
 
-#     await ctx.respond()
-#     await ctx.send("Update started!")
+    await ctx.respond()
+    await ctx.send("Update started!")
 
-#     # await bot_log.send("Благодарим на Админите:")
-#     # await update.update_admins(guild, bot_log)
+    # await bot_log.send("Благодарим на Админите:")
+    # await update.update_admins(guild, bot_log)
 
-#     # await bot_log.send("HackTUES Update")
-#     # await update.update_hacktues(guild)
+    # await bot_log.send("HackTUES Update")
+    # await update.update_hacktues(guild)
 
-#     await ctx.send("Update finished!")
-#     await update.update_alumni(guild)
+    await ctx.send("Update finished!")
+    await update.update_alumni(guild)
 
-#     await update.update_students(guild, bot_log)
-#     await ctx.send("Добре дошли на следващото ниво! :arrow_double_up:")
+    await update.update_students(guild, bot_log)
+    await ctx.send("Добре дошли на следващото ниво! :arrow_double_up:")
 
-#     await ctx.send("Update finished!")
+    await ctx.send("Update finished!")
 
 
 @slash.slash(
